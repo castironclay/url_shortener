@@ -2,7 +2,8 @@ from django.db import models
 from .utils import code_generator, create_shortcode
 from django.conf import settings
 from .validators import validate_url, validate_dot_com
-
+from django.urls import reverse
+from django_hosts.resolvers import reverse
 # Create your models here.
 
 SHORTCODE_MAX = getattr(settings, "SHORTCODE_MAX", 15)
@@ -48,3 +49,26 @@ class ClayURL(models.Model):
 
     def __unicode__(self):
         return str(self.url)
+
+    def get_short_url(self):
+        url_path = reverse("scode", kwargs={'shortcode': self.shortcode}, host='www', scheme='http')
+        return url_path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

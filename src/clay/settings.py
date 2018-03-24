@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     #Custom Apps
     'shortener',
+    'analytics',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ ROOT_URLCONF = 'clay.urls'
 ROOT_HOSTCONF = 'clay.hosts'
 DEFAULT_HOST = 'www'
 DEFAULT_REDIRECT_URL = "http://www.piproject.com:8000"
+PARENT_HOST = "piproject.com:8000"
 
 TEMPLATES = [
     {

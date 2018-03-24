@@ -37,13 +37,9 @@ class HomeView(View):
 
         return render(request, template, context)
 
-class ClayCBView(View):                             #class based view
+#class based view
+class URLRedirectView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
         obj = get_object_or_404(ClayURL, shortcode=shortcode)
+        #save item
         return HttpResponseRedirect(obj.url)
-
-'''
-def clay_redirect_view(request, shortcode=None, *args, **kwargs):   #function based view
-    obj = get_object_or_404(ClayURL, shortcode=shortcode)
-    return HttpResponseRedirect(obj.url)
-'''
