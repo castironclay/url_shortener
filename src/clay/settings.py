@@ -25,7 +25,7 @@ SECRET_KEY = '4ncm862swv(h_az)@)(&)(b6)piu$2&@0z1f5)*-53bhs!uzl$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['piproject.com', 'www.piproject.com']
+ALLOWED_HOSTS = ['piproject.com', 'www.piproject.com', 'blog.piproject.com']
 
 
 # Application definition
@@ -65,7 +65,7 @@ DEFAULT_REDIRECT_URL = "http://www.piproject.com:8000"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "Templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
