@@ -1,18 +1,19 @@
-from django.db import models
-from .utils import code_generator, create_shortcode
 from django.conf import settings
-from .validators import validate_url, validate_dot_com
-from django.urls import reverse
+from django.db import models
+
+#from django.core.urlresolvers import reverse
 from django_hosts.resolvers import reverse
 # Create your models here.
+from .utils import code_generator, create_shortcode
+from .validators import validate_url, validate_dot_com
 
 SHORTCODE_MAX = getattr(settings, "SHORTCODE_MAX", 15)
 
 # Model manager
 class ClayURLManager(models.Manager):
     def all(self, *args, **kwargs):
-        qs = super(ClayURLManager, self).all(*args, **kwargs)
-        qs = qs.filter(active=True)
+        qs_main = super(ClayURLManager, self).all(*args, **kwargs)
+        qs = qs_main.filter(active=True)
         return qs
     #creates admin command to refresh shortcodes
     def refresh_shortcodes(self, items=None):
@@ -34,6 +35,7 @@ class ClayURL(models.Model):
     updated     = models.DateTimeField(auto_now=True) #Everytime model is saved
     timestamp   = models.DateTimeField(auto_now_add=True) #When created
     active      = models.BooleanField(default=True)
+
     objects     = ClayURLManager()
 
     # If new URL saved without shortcode this code will check to see if space is blank
@@ -52,6 +54,7 @@ class ClayURL(models.Model):
 
     def get_short_url(self):
         url_path = reverse("scode", kwargs={'shortcode': self.shortcode}, host='www', scheme='http')
+        print(url_path)
         return url_path
 
 

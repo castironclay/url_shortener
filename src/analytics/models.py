@@ -4,9 +4,9 @@ from shortener.models import ClayURL
 
 
 class ClickEventManager(models.Manager):
-    def create_event(self, instance):
-        if isinstance(ClayURL, instance):
-            obj, created = self.get_or_create(clay_url=instance)
+    def create_event(self, clayInstance):
+        if isinstance(clayInstance, ClayURL):
+            obj, created = self.get_or_create(clay_url=clayInstance)
             obj.count += 1
             obj.save()
             return obj.count
@@ -14,11 +14,10 @@ class ClickEventManager(models.Manager):
 
 
 class ClickEvent(models.Model):
-    clay_url        = models.OneToOneField(ClayURL)
+    clay_url        = models.OneToOneField(ClayURL, on_delete=models.CASCADE, blank=True)
     count           = models.IntegerField(default=0)
     updated         = models.DateTimeField(auto_now=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
-
     objects = ClickEventManager()
 
     def __str__(self):

@@ -11,7 +11,7 @@ def code_generator(size=SHORTCODE_MIN, chars=string.ascii_lowercase + string.dig
     #return new_code
     return ''.join(random.choice(chars) for _ in range(size))
 
-def create_shortcode(instance, size=6):
+def create_shortcode(instance, size=SHORTCODE_MIN):
     new_code = code_generator(size=size)
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(shortcode=new_code).exists()
