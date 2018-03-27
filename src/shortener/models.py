@@ -43,6 +43,8 @@ class ClayURL(models.Model):
     def save(self, *args, **kwargs):
         if self.shortcode is None or self.shortcode == "":
             self.shortcode = code_generator()
+        if not 'http://' in self.url:
+            self.url = 'http://' + self.url
         super(ClayURL, self).save(*args, **kwargs)
 
 
@@ -54,7 +56,6 @@ class ClayURL(models.Model):
 
     def get_short_url(self):
         url_path = reverse("scode", kwargs={'shortcode': self.shortcode}, host='www', scheme='http')
-        print(url_path)
         return url_path
 
 

@@ -46,5 +46,4 @@ class URLRedirectView(View):
        if qs.count() != 1 and not qs.exists():
            raise Http404
        obj = qs.first()
-       print(ClickEvent.objects.create_event(obj))
        return HttpResponseRedirect(obj.url)
