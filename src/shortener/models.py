@@ -47,7 +47,6 @@ class ClayURL(models.Model):
             self.url = 'http://' + self.url
         super(ClayURL, self).save(*args, **kwargs)
 
-
     def __str__(self):
         return str(self.url)
 
